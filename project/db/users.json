@@ -1,0 +1,22 @@
+[
+  {
+    "id": "2c1d67b0-5849-40f5-892b-f5610b83dce8",
+    "username": "johndoe",
+    "email": "johndoe@example.com",
+    "organization": "Acme Corp",
+    "phoneNumber": "+1234567890",
+    "status": "active",
+    "createdAt": "2025-05-03T21:33:27.670828",
+    "password": "$2b$12$ZP291Jg8JwC2AjmcN70PI.odPCg2G30wEXAUWOYQ6Exy4MTOjClq."
+  },
+  {
+    "id": "165350f3-ca33-4d13-8f81-c78850a5e1f7",
+    "username": "maleek berry",
+    "email": "maleek@example.com",
+    "organization": "Acme Corp",
+    "phoneNumber": "+3234567890",
+    "status": "inactive",
+    "createdAt": "2025-05-04T09:42:44.077415",
+    "password": "$2b$12$gbL51LHEqPIenpV5pMx46eKMqBbP35n2l7pZsb88fOSdmhG8CLjn2"
+  }
+]
