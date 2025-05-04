@@ -7,7 +7,8 @@
     "phoneNumber": "+1234567890",
     "status": "active",
     "createdAt": "2025-05-03T21:33:27.670828",
-    "password": "$2b$12$ZP291Jg8JwC2AjmcN70PI.odPCg2G30wEXAUWOYQ6Exy4MTOjClq."
+    "password": "$2b$12$ZP291Jg8JwC2AjmcN70PI.odPCg2G30wEXAUWOYQ6Exy4MTOjClq.",
+     "loans":[]
   },
   {
     "id": "165350f3-ca33-4d13-8f81-c78850a5e1f7",
@@ -17,6 +18,7 @@
     "phoneNumber": "+3234567890",
     "status": "inactive",
     "createdAt": "2025-05-04T09:42:44.077415",
-    "password": "$2b$12$gbL51LHEqPIenpV5pMx46eKMqBbP35n2l7pZsb88fOSdmhG8CLjn2"
+    "password": "$2b$12$gbL51LHEqPIenpV5pMx46eKMqBbP35n2l7pZsb88fOSdmhG8CLjn2",
+    "loans":[]
   }
 ]

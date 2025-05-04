@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routes import users
+from .routes import users,loans,overview
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -18,3 +18,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(users.router)
+app.include_router(loans.loansRouter)
+app.include_router(overview.router)

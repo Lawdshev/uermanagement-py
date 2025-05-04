@@ -3,14 +3,14 @@ from fastapi.responses import JSONResponse
 from uuid import uuid4
 from datetime import datetime
 from ..models import User
-from ..schemas import UserCreate, UserResponse
+from ..schemas import UserCreate, UserResponse, UsersOverview
 from ..utils import read_users, write_users, hash_password
 from project.schemas import UserCreate, UserResponse
 from project.utils import read_users
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
 
-@router.post("/api/users", response_model=UserResponse)
+@router.post("/", response_model=UserResponse)
 def create_user(user: UserCreate):
     try:
         users = read_users()
@@ -44,12 +44,12 @@ def create_user(user: UserCreate):
             content={"detail": f"Internal server error: {str(e)}"},
         )
 
-@router.get("/api/users", response_model=list[UserResponse])
+@router.get("/", response_model=list[UserResponse])
 def list_users():
     users = read_users()
     return [UserResponse(**{k: v for k, v in u.items() if k != "password"}) for u in users]
 
-@router.get("/api/users/{user_id}", response_model=UserResponse)
+@router.get("/{user_id}", response_model=UserResponse)
 def get_user(user_id: str):
     users = read_users()
     user = next((u for u in users if u['id'] == user_id), None)
@@ -57,7 +57,7 @@ def get_user(user_id: str):
         raise HTTPException(status_code=404, detail="User not found")
     return UserResponse(**{k: v for k, v in user.items() if k != "password"})
 
-@router.patch("/api/users/{user_id}/toggle-status", response_model=UserResponse)
+@router.patch("/{user_id}/toggle-status", response_model=UserResponse)
 def toggle_status(user_id: str):
     users = read_users()
     for user in users:
