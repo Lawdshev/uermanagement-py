@@ -46,15 +46,15 @@ def create_user(user: UserCreate):
         )
 
 @router.get("/", response_model=list[UserResponse])
-def list_users(q: Optional[str] = Query(None), skip: int = 0, limit: int = 10):
+def list_users(q: Optional[str] = Query(None), page: int = 0, limit: int = 10):
     users = read_users()
 
     # Filter users based on the query string if provided
     if q:
         users = [u for u in users if q.lower() in u["username"].lower()]
-
     # Apply pagination
-    users = users[skip: skip + limit]
+    start = (page - 1) * limit
+    users = users[start: start + limit]
 
     # Exclude the 'password' field and create UserResponse objects
     filtered_users = []
