@@ -1,9 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from typing import Optional
+from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import JSONResponse
 from uuid import uuid4
 from datetime import datetime
 from ..models import User
-from ..schemas import UserCreate, UserResponse, UsersOverview
+from ..schemas import UserCreate, UserResponse
 from ..utils import read_users, write_users, hash_password
 from project.schemas import UserCreate, UserResponse
 from project.utils import read_users
@@ -45,9 +46,23 @@ def create_user(user: UserCreate):
         )
 
 @router.get("/", response_model=list[UserResponse])
-def list_users():
+def list_users(q: Optional[str] = Query(None), skip: int = 0, limit: int = 10):
     users = read_users()
-    return [UserResponse(**{k: v for k, v in u.items() if k != "password"}) for u in users]
+
+    # Filter users based on the query string if provided
+    if q:
+        users = [u for u in users if q.lower() in u["username"].lower()]
+
+    # Apply pagination
+    users = users[skip: skip + limit]
+
+    # Exclude the 'password' field and create UserResponse objects
+    filtered_users = []
+    for u in users:
+        user_data = {k: v for k, v in u.items() if k != "password"}
+        filtered_users.append(UserResponse(**user_data))
+
+    return filtered_users
 
 @router.get("/{user_id}", response_model=UserResponse)
 def get_user(user_id: str):
